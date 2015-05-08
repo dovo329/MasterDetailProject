@@ -16,17 +16,77 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSMutableArray *constraintsMutArr = [NSMutableArray new];
+    
     // Do any additional setup after loading the view.
     
-    UILabel *exerciseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 320, 20)];
-    exerciseNameLabel.text = self.exercise.name;
-    exerciseNameLabel.backgroundColor = [UIColor greenColor];
-    [exerciseNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:exerciseNameLabel];
+    //UILabel *exerciseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 320, 20)];
+    //exerciseNameLabel.text = self.exercise.name;
+    //exerciseNameLabel.backgroundColor = [UIColor greenColor];
+    //exerciseNameLabel.textAlignment = NSTextAlignmentCenter;
+    //[exerciseNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.title = self.exercise.name;
+    //[self.view addSubview:exerciseNameLabel];
+    
+    UILabel *workWeightLabel = [[UILabel alloc] init];
+    //workWeightLabel.text = @"Work Weight\n\n\n\n\n";
+    workWeightLabel.text = @"Work Weight";
+    workWeightLabel.lineBreakMode = NSLineBreakByClipping;
+    workWeightLabel.textAlignment = NSTextAlignmentCenter;
+    workWeightLabel.numberOfLines = 0;
+    workWeightLabel.font = [UIFont systemFontOfSize:200];
+    workWeightLabel.adjustsFontSizeToFitWidth = YES;
+    workWeightLabel.backgroundColor = [UIColor purpleColor];
+    
+    [self.view addSubview:workWeightLabel];
+    [workWeightLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *workWeightLabelXPosConstraint =
+    [NSLayoutConstraint constraintWithItem:workWeightLabel
+                                 attribute:NSLayoutAttributeLeadingMargin
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeLeadingMargin
+                                multiplier:1.0
+                                  constant:0.0];
+    [constraintsMutArr addObject:workWeightLabelXPosConstraint];
+    
+    NSLayoutConstraint *workWeightLabelYPosConstraint =
+    [NSLayoutConstraint constraintWithItem:workWeightLabel
+                                 attribute:NSLayoutAttributeTop
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.topLayoutGuide
+                                 attribute:NSLayoutAttributeBottom
+                                multiplier:1.0
+                                  constant:8.0];
+    [constraintsMutArr addObject:workWeightLabelYPosConstraint];
+    
+    NSLayoutConstraint *workWeightLabelWidthConstraint =
+    [NSLayoutConstraint constraintWithItem:workWeightLabel
+                                 attribute:NSLayoutAttributeWidth
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeWidth
+                                multiplier:0.5
+                                  constant:0.0];
+    [constraintsMutArr addObject:workWeightLabelWidthConstraint];
+    
+    NSLayoutConstraint *workWeightLabelHeightConstraint =
+    [NSLayoutConstraint constraintWithItem:workWeightLabel
+                                 attribute:NSLayoutAttributeHeight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeHeight
+                                multiplier:0.1
+                                  constant:0.0];
+    [constraintsMutArr addObject:workWeightLabelHeightConstraint];
+    
     
     UITextField *weightAmountTextField = [[UITextField alloc] initWithFrame:CGRectMake(0,120,320,20)];
     weightAmountTextField.text = [NSString stringWithFormat:@"%d", self.exercise.weight];
     weightAmountTextField.backgroundColor = [UIColor whiteColor];
+    weightAmountTextField.textAlignment = NSTextAlignmentCenter;
     //[weightAmountTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:weightAmountTextField];
     
@@ -35,15 +95,14 @@
         UITextField *setTextField = [[UITextField alloc] initWithFrame:CGRectMake(i*50.0,180,40,40)];
         setTextField.text = @"5";
         setTextField.backgroundColor = [UIColor whiteColor];
+        setTextField.textAlignment = NSTextAlignmentCenter;
         [setTextFieldArray addObject:setTextField];
         //[setTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:setTextField];
     }
     NSLog(@"setTextFieldArray count==%d", (int)[setTextFieldArray count]);
     
-    NSMutableArray *constraintsMutArr = [NSMutableArray new];
-    
-    NSLayoutConstraint *exerciseNameWidthConstraint =
+    /*NSLayoutConstraint *exerciseNameWidthConstraint =
     [NSLayoutConstraint constraintWithItem:exerciseNameLabel
                                  attribute:NSLayoutAttributeWidth
                                  relatedBy:NSLayoutRelationEqual
@@ -51,7 +110,7 @@
                                  attribute:NSLayoutAttributeWidth
                                 multiplier:0.5
                                   constant:0.0];
-    [constraintsMutArr addObject:exerciseNameWidthConstraint];
+     [constraintsMutArr addObject:exerciseNameWidthConstraint];
 
     NSLayoutConstraint *exerciseNameVerticalPositionConstraint =
     [NSLayoutConstraint constraintWithItem:exerciseNameLabel
@@ -62,6 +121,16 @@
                                 multiplier:1.0
                                   constant:0.0];
     [constraintsMutArr addObject:exerciseNameVerticalPositionConstraint];
+    
+    NSLayoutConstraint *exerciseNameXPositionConstraint =
+    [NSLayoutConstraint constraintWithItem:exerciseNameLabel
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.0
+                                  constant:0.0];
+    [constraintsMutArr addObject:exerciseNameXPositionConstraint];*/
     
     [self.view addConstraints:constraintsMutArr];
 }
